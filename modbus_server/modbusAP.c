@@ -10,15 +10,7 @@
 
 int Send_Modbus_request(char*, int, uint8_t* , int, uint8_t*);
 
-void print_char_array(char * name, char * array, size_t len) {
-    printf("%s", name);
 
-    for (int i = 0; i < len; i++) {
-        printf("%02x ", array[i] & 0xFF);
-    }
-
-    printf("\n");
-}
 
 int Write_multiple_regs (char* server_add, int port , int st_r, int n_r, uint16_t* val) {
 
@@ -80,7 +72,6 @@ int Read_h_regs (char* server_add, int port, int st_r, int n_r, uint16_t* val)
     if(Send_Modbus_request (server_add,port,APDU,APDUlen,APDU_R) < 0)
         return(ERR_SEND);
     
-    print_char_array("resposta", APDU_R, 255);
 
     // checks the reponse (APDU_R or error_code)
     uint8_t aux = (uint8_t)(APDU_R[0]);
